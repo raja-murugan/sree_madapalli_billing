@@ -43,6 +43,10 @@
                         <li class="{{ Route::is('salespayment.index') ? 'active' : '' }}">
                             <a href="{{ route('salespayment.index') }}"><i data-feather="shopping-cart"></i><span>Sales Payment</span></a>
                         </li>
+                        
+                        <li class="{{ Route::is('deliverysales.delivery_index', 'deliverysales.delivery_datefilter') ? 'active' : '' }}">
+                            <a href="{{ route('deliverysales.delivery_index') }}"><i data-feather="shopping-cart"></i><span>Delivery Sales</span></a>
+                        </li>
                     </ul>
                 </li>
                 <li class="submenu-open">

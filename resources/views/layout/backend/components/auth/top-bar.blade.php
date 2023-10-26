@@ -33,11 +33,13 @@
                             @php
                             $lastword = Request::url();
                             $current_url = "http://127.0.0.1:8000/zworktechnology/sales/create";
-                            $live_url = "https://annapooranifoods.com/zworktechnology/sales/create";
+                            $live_url = "https://bill.sreemadapalli.in/zworktechnology/sales/create";
+                            $delivery_live_url = "https://bill.sreemadapalli.in/zworktechnology/deliverysales/delivery_create";
+                            $delivery_local_url = "http://127.0.0.1:8000/zworktechnology/deliverysales/delivery_create";
 
                             @endphp
 
-                            @if ($lastword == $live_url)
+                            @if ($lastword == $live_url || $lastword == $delivery_live_url)
                     <div class="searchinputs">
                             <style>
                                 option.avatar {

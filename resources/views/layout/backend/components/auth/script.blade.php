@@ -356,16 +356,30 @@
                     
                 // }else if (window.location.href.indexOf("http://127.0.0.1:8000/zworktechnology/sales/create") > -1) {
                 //     var last_part = '';
+                // }else if (window.location.href.indexOf("http://127.0.0.1:8000/zworktechnology/deliverysales/delivery_edit") > -1){
+
+                //     var url = $(location).attr('href');
+                //     var parts = url.split("/");
+                //     var last_part = parts[parts.length-1];
+                // }else if (window.location.href.indexOf("http://127.0.0.1:8000/zworktechnology/deliverysales/delivery_create") > -1) {
+                //     var last_part = '';
                 // }
                 
 
-                if (window.location.href.indexOf("https://annapooranifoods.com/zworktechnology/sales/edit") > -1) {
+                if (window.location.href.indexOf("https://bill.sreemadapalli.in/zworktechnology/sales/edit") > -1) {
                     var url = $(location).attr('href');
                     var parts = url.split("/");
                     var last_part = parts[parts.length-1];
 
                     
-                }else if (window.location.href.indexOf("https://annapooranifoods.com/zworktechnology/sales/create") > -1) {
+                }else if (window.location.href.indexOf("https://bill.sreemadapalli.in/zworktechnology/sales/create") > -1) {
+                    var last_part = '';
+                }else if (window.location.href.indexOf("https://bill.sreemadapalli.in/zworktechnology/deliverysales/delivery_edit") > -1){
+
+                    var url = $(location).attr('href');
+                    var parts = url.split("/");
+                    var last_part = parts[parts.length-1];
+                }else if (window.location.href.indexOf("https://bill.sreemadapalli.in/zworktechnology/deliverysales/delivery_create") > -1) {
                     var last_part = '';
                 }
 
@@ -808,12 +822,16 @@ $('#sales_store').submit(function(e){
 
     //console.log($(this).serialize());
 
+    $('button[type=submit], input[type=submit]').prop('disabled',true);
+
+
     //var billno = $('#bill_no').val();
     var date = $('#date').val();
     var time = $('#time').val();
     var sales_type = $('input[name=sales_type]:checked').val();
     var customer_type = $('#customer_type').val();
     var customer_id = $('#customer_id').val();
+    var deliveryboy_id = $('#deliveryboy_id').val();
     var subtotal = $('#subtotal').val();
     var taxamount = $('#taxamount').val();
     var paymentmethod = $('input[name=paymentmethod]:checked').val();
@@ -821,6 +839,7 @@ $('#sales_store').submit(function(e){
     var sale_discount = $('#sale_discount').val();
     var grandtotal = $('#grandtotal').val();
     var saleid = $('#saleid').val();
+    var session_ids = $('input[name=session_ids]:checked').val();
 
     var product_ids = $("input[name='product_id[]']")
             .map(function () {
@@ -878,6 +897,8 @@ $('#sales_store').submit(function(e){
                     product_session_id: product_session_id,
                     saleid: saleid,
                     saleproductsid: saleproductsid,
+                    deliveryboy_id: deliveryboy_id,
+                    session_ids: session_ids,
                 },
                 dataType: 'json',
                 success: function(response) {
@@ -894,10 +915,11 @@ $('#sales_store').submit(function(e){
                         var last_salesid = response.last_id;
                         
                     
-                       // window.location= "http://127.0.0.1:8000/zworktechnology/sales/print/" + last_salesid;
-                        window.location= "https://annapooranifoods.com/zworktechnology/sales/print/" + last_salesid;
+                        //window.location= "http://127.0.0.1:8000/zworktechnology/sales/print/" + last_salesid;
+                        window.location= "https://bill.sreemadapalli.in/zworktechnology/sales/print/" + last_salesid;
 
 
+                        $('button[type=submit], input[type=submit]').prop('disabled',false);
                         document.getElementById("sales_store").reset();
                         $('.product-table').empty('');
                         $('.selectproduct').attr('style', 'background-color:#7367f0;color: #fff;').val('Add to Cart').attr('disabled', false);
@@ -918,6 +940,11 @@ $('#sales_store').submit(function(e){
                         $('.customertyp').show();
                         $('.selectproduct').show();
                         $('.setvaluecash').show();
+                        $('.salepaymentpaid_customerid').val('');
+                        $('.salepaymentpaid_customerid').select2().trigger('change');
+                        $('.deliveryboy_id').val('');
+                        $('.deliveryboy_id').select2().trigger('change');
+                        $('input[name=session_ids]:checked').val('');
 
                     }
                     //alert('Bill Added').attr('style', 'background-color:yellow;');
@@ -935,12 +962,15 @@ $('#sales_update').submit(function(e){
 
     //console.log($(this).serialize());
 
+    $('button[type=submit], input[type=submit]').prop('disabled',true);
+
     //var billno = $('#bill_no').val();
     var date = $('#date').val();
     var time = $('#time').val();
     var sales_type = $('input[name=sales_type]:checked').val();
     var customer_type = $('#customer_type').val();
     var customer_id = $('#customer_id').val();
+    var deliveryboy_id = $('#deliveryboy_id').val();
     var subtotal = $('#subtotal').val();
     var taxamount = $('#taxamount').val();
     var paymentmethod = $('input[name=paymentmethod]:checked').val();
@@ -948,6 +978,7 @@ $('#sales_update').submit(function(e){
     var sale_discount = $('#sale_discount').val();
     var grandtotal = $('#grandtotal').val();
     var saleid = $('#saleid').val();
+    var session_ids = $('input[name=session_ids]:checked').val();
 
     var product_ids = $("input[name='product_id[]']")
             .map(function () {
@@ -1005,6 +1036,8 @@ $('#sales_update').submit(function(e){
                     product_session_id: product_session_id,
                     saleid: saleid,
                     saleproductsid: saleproductsid,
+                    deliveryboy_id: deliveryboy_id,
+                    session_ids: session_ids,
                 },
                 dataType: 'json',
                 success: function(response) {
@@ -1019,10 +1052,19 @@ $('#sales_update').submit(function(e){
                         }, 2000 );
 
                         var last_salesid = response.last_id;
+
+
+                        if(response.status == 'delivery'){
+
+                         //window.location= "http://127.0.0.1:8000/zworktechnology/deliverysales/";
+                        window.location= "https://bill.sreemadapalli.in/zworktechnology/deliverysales";
+                        }else {
+                        // window.location= "http://127.0.0.1:8000/zworktechnology/sales/";
+                        window.location= "https://bill.sreemadapalli.in/zworktechnology/sales";
+                        }
                         
                     
-                       // window.location= "http://127.0.0.1:8000/zworktechnology/sales/";
-                        window.location= "https://annapooranifoods.com/zworktechnology/sales";
+                       
 
 
                         document.getElementById("sales_update").reset();
@@ -1046,7 +1088,11 @@ $('#sales_update').submit(function(e){
                         $('.customertyp').show();
                         $('.selectproduct').show();
                         $('.setvaluecash').show();
-
+                        $('.salepaymentpaid_customerid').val('');
+                        $('.salepaymentpaid_customerid').select2().trigger('change');
+                        $('.deliveryboy_id').val('');
+                        $('.deliveryboy_id').select2().trigger('change');
+                        $('input[name=session_ids]:checked').val('');
                     }
                     //alert('Bill Added').attr('style', 'background-color:yellow;');
 
