@@ -38,12 +38,12 @@
                 </style>
                 <div class="col-lg-9 col-sm-12">
                 <div class="alert-success" style="display:none;">
-                    <span class="closebtn">&times;</span>  
+                    <span class="closebtn">&times;</span>
                     <strong>Success!</strong> Indicates a successful or positive action.
                 </div>
                 </div>
                 <div class="col-lg-3 col-sm-12">
-                
+
                 </div>
                 </div>
                 <div class="row">
@@ -62,7 +62,7 @@
                                             id="purchase{{ $sessions->id }}-tab" data-bs-toggle="tab"
                                             onclick="sessiontype({{ $sessions->id }})"
                                             data-bs-target="#purchase{{ $sessions->id }}" type="button"
-                                            aria-controls="purchase{{ $sessions->id }}" aria-selected="true" 
+                                            aria-controls="purchase{{ $sessions->id }}" aria-selected="true"
                                             role="tab">{{ $sessions->name }}</button>
                                     </li>
                                 @endforeach
@@ -102,13 +102,13 @@
                             @foreach ($category as $index => $categories)
                                 <div class="tab_content @if ($index == 0) active @endif"
                                     data-tab="fruits{{ $categories->id }}">
-                                    
+
                                     <div class="row prodcttsdiv" >
                                     @foreach ($produc_session_arr as $key => $produc_session_array)
                                                 @if ($produc_session_array['category_id'] == $categories->id)
 
-                                                
-                                                    <div class="col-lg-3 col-sm-6 d-flex  ">
+
+                                                    <div class="col-lg-2 col-sm-2 col-2 d-flex  ">
                                                         <div class="productset flex-fill" style="border: 1px solid #afbcc6;">
                                                             <div class="productsetimg" style="height:110px;">
                                                                 <img src="{{ asset('assets/product/' . $produc_session_array['productimage']) }}"
@@ -153,10 +153,10 @@
                                                 @endif
                                             @endforeach
                                         </div>
-                                    
-                                    
 
-                                    
+
+
+
                                 </div>
                             @endforeach
                         </div>
@@ -165,7 +165,7 @@
                     <div class="col-lg-4 col-sm-12 ">
                         <div class="order-list">
                             <div class="orderid">
-                                <h4>Order List  #{{$latestbillno}}</h4> 
+                                <h4>Order List  #{{$latestbillno}}</h4>
                                 <h5>Date : {{$SaleData->date}}</h5>
                             </div>
                             <div class="orderid">
@@ -260,7 +260,7 @@
                                              </div>
                                           </div>
                                        </li>
-                                       
+
                                        <input type="hidden" name="total_price[]" class="total_price{{$SaleProducts_data['product_session_id']}}" value="{{$SaleProducts_data['total_price']}}"/>
                                        <input type="hidden" name="product_session_id[]" class="product_session_id" value="{{$SaleProducts_data['product_session_id']}}"/>
                                        <li><span class="totalprice{{$SaleProducts_data['product_session_id']}}">{{$SaleProducts_data['total_price']}}</span></li>
@@ -400,7 +400,7 @@
                                                 <td>₹ {{ $DineInoutputs['grandtotal'] }}</td>
                                             </tr>
                                             @endforeach
-                                           
+
                                         </tbody>
                                     </table>
                                 </div>
