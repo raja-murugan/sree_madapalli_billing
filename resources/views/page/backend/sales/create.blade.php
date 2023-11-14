@@ -37,12 +37,12 @@
                 </style>
                 <div class="col-lg-9 col-sm-12">
                 <div class="alert-success" style="display:none;">
-                    <span class="closebtn">&times;</span>  
+                    <span class="closebtn">&times;</span>
                     <strong>Success!</strong> Indicates a successful or positive action.
                 </div>
                 </div>
                 <div class="col-lg-3 col-sm-12">
-                
+
                 </div>
                 </div>
                 <div class="row">
@@ -61,18 +61,14 @@
                                             id="purchase{{ $sessions->id }}-tab" data-bs-toggle="tab"
                                             onclick="sessiontype({{ $sessions->id }})"
                                             data-bs-target="#purchase{{ $sessions->id }}" type="button"
-                                            aria-controls="purchase{{ $sessions->id }}" aria-selected="true" 
+                                            aria-controls="purchase{{ $sessions->id }}" aria-selected="true"
                                             role="tab">{{ $sessions->name }}</button>
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
 
-
-
                         <div class="tab-content" id="myTabContent">
-
-
                             @foreach ($session as $index => $session_ss)
                                 <div class="tab-pane fade show @if ($session_ss->id == 1) active @endif "
                                     id="purchase{{ $session_ss->id }}" role="tabpanel"
@@ -96,18 +92,17 @@
                             @endforeach
                         </div>
 
-
                         <div class="tabs_container">
                             @foreach ($category as $index => $categories)
                                 <div class="tab_content @if ($index == 0) active @endif"
                                     data-tab="fruits{{ $categories->id }}">
-                                    
+
                                     <div class="row prodcttsdiv" >
                                     @foreach ($produc_session_arr as $key => $produc_session_array)
                                                 @if ($produc_session_array['category_id'] == $categories->id)
 
-                                                
-                                                    <div class="col-lg-3 col-sm-6 d-flex  ">
+
+                                                    <div class="col-lg-2 col-sm-2 col-2 d-flex">
                                                         <div class="productset flex-fill" style="border: 1px solid #afbcc6;">
                                                             <div class="productsetimg" style="height:110px;">
                                                                 <img src="{{ asset('assets/product/' . $produc_session_array['productimage']) }}"
@@ -152,10 +147,10 @@
                                                 @endif
                                             @endforeach
                                         </div>
-                                    
-                                    
 
-                                    
+
+
+
                                 </div>
                             @endforeach
                         </div>
@@ -230,7 +225,7 @@
                                     <a class="remove-ultr" hidden>Clear all</a>
                                 </div>
                                 <div class="product-table">
-                                
+
                                 </div>
                             </div>
                             <div class="split-card">
@@ -365,7 +360,7 @@
                                                 <td>₹ {{ $DineInoutputs['grandtotal'] }}</td>
                                             </tr>
                                             @endforeach
-                                           
+
                                         </tbody>
                                     </table>
                                 </div>
